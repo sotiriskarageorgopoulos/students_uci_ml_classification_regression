@@ -4,9 +4,9 @@ RESULTS FOR school LABEL ON LESSEON MATHS...
  Mean f1 score: 0.856255214953619 
  Mean recall score: 0.8416025641025641
 ===============================================================
- Mean Accuracy: 0.8694230769230769 
- Mean f1 score: 0.8675002147358605 
- Mean recall score: 0.8694230769230769
+ Mean Accuracy: 0.8694871794871796 
+ Mean f1 score: 0.871812343774369 
+ Mean recall score: 0.8694871794871796
 ===============================================================
  Mean Accuracy: 0.8416666666666668 
  Mean f1 score: 0.8565889698063611 
@@ -26,9 +26,9 @@ RESULTS FOR school LABEL ON LESSEON PORTUGUESE...
  Mean f1 score: 0.764045053951474 
  Mean recall score: 0.6712499999999999
 ===============================================================
- Mean Accuracy: 0.6369471153846155 
- Mean f1 score: 0.6377754532425133 
- Mean recall score: 0.6369471153846155
+ Mean Accuracy: 0.6709615384615385 
+ Mean f1 score: 0.725096283151559 
+ Mean recall score: 0.6709615384615385
 ===============================================================
  Mean Accuracy: 0.6712259615384615 
  Mean f1 score: 0.7626924453669235 
@@ -48,9 +48,9 @@ RESULTS FOR higher LABEL ON LESSEON MATHS...
  Mean f1 score: 0.9122758142958289 
  Mean recall score: 0.9241666666666667
 ===============================================================
- Mean Accuracy: 0.8782051282051281 
- Mean f1 score: 0.8879671860146828 
- Mean recall score: 0.8782051282051281
+ Mean Accuracy: 0.9443589743589744 
+ Mean f1 score: 0.9229488268961952 
+ Mean recall score: 0.9443589743589744
 ===============================================================
  Mean Accuracy: 0.9392948717948718 
  Mean f1 score: 0.9202843704471935 
@@ -70,9 +70,9 @@ RESULTS FOR higher LABEL ON LESSEON PORTUGUESE...
  Mean f1 score: 0.8520605367157422 
  Mean recall score: 0.8719711538461539
 ===============================================================
- Mean Accuracy: 0.8162740384615386 
- Mean f1 score: 0.8303994904943014 
- Mean recall score: 0.8162740384615386
+ Mean Accuracy: 0.8828125 
+ Mean f1 score: 0.8513898865238915 
+ Mean recall score: 0.8828125
 ===============================================================
  Mean Accuracy: 0.8889182692307693 
  Mean f1 score: 0.8585576562794642 
@@ -92,9 +92,9 @@ RESULTS FOR G3 LABEL ON LESSEON MATHS...
  Mean f1 score: 0.7598526251756278 
  Mean recall score: 0.7645512820512821
 ===============================================================
- Mean Accuracy: 0.5791666666666666 
- Mean f1 score: 0.5768025648258888 
- Mean recall score: 0.5791666666666666
+ Mean Accuracy: 0.6913461538461538 
+ Mean f1 score: 0.6847592128880354 
+ Mean recall score: 0.6913461538461538
 ===============================================================
  Mean Accuracy: 0.7598717948717949 
  Mean f1 score: 0.7511950450955054 
@@ -114,9 +114,9 @@ RESULTS FOR G3 LABEL ON LESSEON PORTUGUESE...
  Mean f1 score: 0.7264837441709128 
  Mean recall score: 0.7272355769230769
 ===============================================================
- Mean Accuracy: 0.5916586538461539 
- Mean f1 score: 0.5840906297082356 
- Mean recall score: 0.5916586538461539
+ Mean Accuracy: 0.6979567307692307 
+ Mean f1 score: 0.695862290902369 
+ Mean recall score: 0.6979567307692307
 ===============================================================
  Mean Accuracy: 0.7518509615384615 
  Mean f1 score: 0.7508923609495957 

@@ -12,6 +12,9 @@ class DataCollection():
         self.__path = path
 
     def collect_standardized_data(self,label):
+        '''
+        Collects the data from csv and standardizes them.
+        '''
         students_df = pd.read_csv(self.__path,sep=";")
         if label == 'G3':
             students_df = self.__five_level_grade(students_df)
@@ -25,6 +28,9 @@ class DataCollection():
         return self.__standardize(students_df,cols_except_label,label,labels)
 
     def collect(self,label):
+        '''
+        Collects the data from csv.
+        '''
         students_df = pd.read_csv(self.__path,sep=";")
         if label == 'G3':
             students_df = self.__five_level_grade(students_df)
@@ -36,11 +42,22 @@ class DataCollection():
         return students_df
 
     def __standardize(self,df,cols,label_col,labels):
+        '''
+        Standardize the features of data set.
+        '''
         standardized_df = (df[cols] - df[cols].mean())/ df[cols].std(ddof=0)
         standardized_df[label_col] = labels
         return standardized_df
 
     def __five_level_grade(self,df:pd.DataFrame):
+        '''Converts the grades of range: [0,20], to five classes.\n
+        The classes are:
+        - A -> [16,20]
+        - B -> [14,15]
+        - C -> [12,13]
+        - D -> [10,11]
+        - F -> [0,9]
+        '''
         df = df.astype({'G1':'int','G2':'int'})
         df["G3"].replace([20,19,18,17,16],'A',inplace=True)
         df["G3"].replace([15,14],'B',inplace=True)

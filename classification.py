@@ -20,6 +20,14 @@ class Classification:
         self.__features_cols = features_cols
         
     def classify(self,**kwargs):
+        '''
+        Classify students by selected algorithm.
+        Keyword Arguments:
+        - max_depth: The maximum depth of tree for Decision Tree Classifier.
+        - k: The number of neighbors for K neigbors Classifier.
+        - iter: Number of iterations for Neural Network.
+        - activation function for neurons of Neural Network.
+        '''
         if self.__classifier == 'decision_tree' and kwargs.get('max_depth') is not None:
             self.__classify_DT(kwargs.get('max_depth'))
         elif self.__classifier == 'kneighbors':
@@ -37,6 +45,9 @@ class Classification:
             raise Exception('The parameters are not defined properly...')
         
     def __split_labels_features(self):
+        '''
+        Split the data set to features and label
+        '''
         dc = DataCollection(self.__path)
         students_df = dc.collect(self.__label_col)
         labels = students_df[self.__label_col]
@@ -44,6 +55,9 @@ class Classification:
         return features,labels
     
     def __split_labels_features_std(self):
+        '''
+        Split the data set to standardized features and label
+        '''
         dc = DataCollection(self.__path)
         students_df = dc.collect_standardized_data(self.__label_col)
         labels = students_df[self.__label_col]
@@ -51,6 +65,11 @@ class Classification:
         return features,labels
     
     def __classify_DT(self,max_depth):
+        '''
+        Implements the Decision Tree Classifier.
+        Arguments:
+        - max_depth: The maximum depth of tree for Decision Tree Classifier.
+        '''
         students_details,labels = self.__split_labels_features()
         cv = KFold(n_splits=10)
         dtc = DecisionTreeClassifier(max_depth=max_depth,random_state=0)
@@ -58,30 +77,51 @@ class Classification:
         self.__visualize_DT(dtc.fit(students_details.values,labels.values),self.__features_cols,labels.values)
     
     def __classify_RT(self):
+        '''
+        Implements the Random Forest Classifier.
+        '''
         students_details,labels = self.__split_labels_features()
         cv = KFold(n_splits=10)
         rfc = RandomForestClassifier(max_depth=5, random_state=0)
         self.__evaluate_classification(rfc,students_details.values,labels.values,cv)
         
     def __kneighbors(self,k):
+        '''
+        Implements the K neigbors Classifier.
+        Arguments:
+        - k: The number of neighbors.
+        '''
         students_details,labels = self.__split_labels_features()
         cv = KFold(n_splits=10)
         knn = KNeighborsClassifier(n_neighbors=k) 
         self.__evaluate_classification(knn,students_details.values,labels.values,cv)
         
     def __classify_SVM(self):
+        '''
+        Implements the Support Vector Machine(SVM) Classifier.
+        '''
         students_details,labels = self.__split_labels_features()
         cv = KFold(n_splits=10)
         svc = SVC(kernel='linear')
         self.__evaluate_classification(svc,students_details.values,labels.values,cv)
         
     def __classify_MLP(self,iterations,activation_func):
+        '''
+        Implements a Multi-Layer Perceptron Neural Network for classification.
+        Arguments:
+        - iterations: number of iterations of NN.
+        - activation_func: activation function for neurons of NN.
+        '''
         students_details,labels = self.__split_labels_features_std()
         cv = KFold(n_splits=10)
         mlpc = MLPClassifier(random_state=1, max_iter=iterations, solver='lbfgs',activation=activation_func)
         self.__evaluate_classification(mlpc,students_details.values,labels.values,cv)
         
     def __evaluate_classification(self,classifier,features,labels,cv):
+        '''
+        Evaluates classifier with 10-Fold cross validation.
+        The used measures are mean accuracy, mean f1 score and mean recall.
+        '''
         uniq_labels = np.unique(labels)
         accuracy_scores = cross_val_score(classifier,features, labels, scoring='accuracy', cv=cv, n_jobs=-1)
         f1_scores = cross_val_score(classifier,features, labels, scoring=make_scorer(f1_score, average='weighted', labels=uniq_labels, zero_division=0), cv=cv, n_jobs=-1)
@@ -97,6 +137,9 @@ class Classification:
             print(f" Mean Accuracy: {mean_accuracy} \n Mean f1 score: {mean_f1_score} \n Mean recall score: {mean_recall_score}",end="\n===============================================================\n",file=f)
     
     def __visualize_DT(self,clf,features_cols,labels):
+        '''
+        Visualizes the tree of Decision Tree algorithm.
+        '''
         uniq_labels = np.unique(labels)
         fig = plt.figure(figsize=(30,30))
         plot_tree(clf,feature_names=features_cols,class_names=uniq_labels,filled=True,rounded=True,fontsize=16)  
