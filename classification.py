@@ -19,14 +19,20 @@ class Classification:
         self.__label_col = label_col
         self.__features_cols = features_cols
         
+    def __str__(self):
+        print(f"Classification with {self.__classifier}...",end="\n===============================================================\n")  
+        with open("results.txt","a") as f:
+            print(f"Classification with {self.__classifier}...",end="\n===============================================================\n",file=f)  
+        return f"Classification with {self.__classifier}..."
+    
     def classify(self,**kwargs):
         '''
-        Classify students by selected algorithm.
+        Classify students by selected algorithm. \n
         Keyword Arguments:
         - max_depth: The maximum depth of tree for Decision Tree Classifier.
         - k: The number of neighbors for K neigbors Classifier.
         - iter: Number of iterations for Neural Network.
-        - activation function for neurons of Neural Network.
+        - activation_func: activation function for neurons of Neural Network.
         '''
         if self.__classifier == 'decision_tree' and kwargs.get('max_depth') is not None:
             self.__classify_DT(kwargs.get('max_depth'))
@@ -49,7 +55,7 @@ class Classification:
         Split the data set to features and label
         '''
         dc = DataCollection(self.__path)
-        students_df = dc.collect(self.__label_col)
+        students_df = dc.collect(label=self.__label_col)
         labels = students_df[self.__label_col]
         features = students_df[self.__features_cols]
         return features,labels
@@ -59,7 +65,7 @@ class Classification:
         Split the data set to standardized features and label
         '''
         dc = DataCollection(self.__path)
-        students_df = dc.collect_standardized_data(self.__label_col)
+        students_df = dc.collect_standardized_data(label=self.__label_col)
         labels = students_df[self.__label_col]
         features = students_df[self.__features_cols]
         return features,labels
@@ -119,7 +125,7 @@ class Classification:
         
     def __evaluate_classification(self,classifier,features,labels,cv):
         '''
-        Evaluates classifier with 10-Fold cross validation.
+        Evaluates classifier with K-Fold cross validation.
         The used measures are mean accuracy, mean f1 score and mean recall.
         '''
         uniq_labels = np.unique(labels)
