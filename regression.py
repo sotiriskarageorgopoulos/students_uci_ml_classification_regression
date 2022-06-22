@@ -4,6 +4,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.neural_network import MLPRegressor
+from sklearn.linear_model import LinearRegression
 import numpy as np
 
 class Regression:
@@ -34,6 +35,8 @@ class Regression:
             iter = kwargs.get('iter')
             activation_func = kwargs.get('activation_func')
             self.__regress_MLP(target,iter,activation_func)
+        elif self.__regressor == 'mlr':
+            self.__regress_MLR(target)
         else:
             raise Exception('The parameters are not defined properly...')
     
@@ -46,6 +49,24 @@ class Regression:
         features = students_df.loc[:,students_df.columns != target_]
         target = students_df[target_]
         return features,target
+    
+    def __regress_MLR(self,target_):
+        features, target = self.__split_features_targets(target_)
+        regressor = LinearRegression()
+        cv = KFold(n_splits=10)
+        self.__evaluate_regression(regressor,features,target,cv)
+        model = regressor.fit(features,target)
+        f_cols = features.columns
+        model_str = f"y={model.intercept_}"
+        for i,col in enumerate(f_cols):
+            if model.coef_[i] > 0:
+                model_str += f"+{model.coef_[i]}*{col}"
+            elif model.coef_[i] < 0:
+                model_str += f"{model.coef_[i]}*{col}" 
+                
+        print(f"The multiple regression model is: \n {model_str}",end="\n===============================================================\n")
+        with open("results.txt","a") as f:
+            print(f"The multiple regression model is: \n {model_str}",end="\n===============================================================\n",file=f)
     
     def __regress_DT(self,target_):
         '''

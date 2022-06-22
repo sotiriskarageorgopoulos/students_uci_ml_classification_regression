@@ -79,6 +79,10 @@ if __name__ == '__main__':
         mlpr_mat_reg.__str__()
         mlpr_mat_reg.regress('G3',iter=21,activation_func='identity')
         
+        mlr_mat_reg = Regression('mlr',MATHS_CLASS_PATH)
+        mlr_mat_reg.__str__()
+        mlr_mat_reg.regress('G3')
+        
         print("REGRESSION FOR PORTUGUESE CLASS...",end="\n===============================================================\n")
         with open("results.txt","a") as f:
             print("REGRESSION FOR PORTUGUESE CLASS...",end="\n===============================================================\n",file=f)
@@ -94,6 +98,10 @@ if __name__ == '__main__':
         mlpr_por_reg = Regression('mlpr',POR_CLASS_PATH)
         mlpr_por_reg.__str__()
         mlpr_por_reg.regress('G3',iter=18,activation_func='identity')
+        
+        mlr_mat_reg = Regression('mlr',POR_CLASS_PATH)
+        mlr_mat_reg.__str__()
+        mlr_mat_reg.regress('G3')
     
     cols_for_school = ['studytime','famsup','address','traveltime'] 
     display_classification_results('school',cols_for_school,9,7,'identity','identity')
